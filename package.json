@@ -20,6 +20,10 @@
     "content-generation",
     "llm"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Davidyfxu/llm-blog-seo.git"
+  },
   "author": "davidyfxu",
   "license": "MIT",
   "devDependencies": {
