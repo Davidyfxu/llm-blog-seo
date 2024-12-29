@@ -1,4 +1,16 @@
-// 这里是您的包的主入口文件
-export const hello = (name: string): string => {
-  return `Hello, ${name}!`;
+import { ConfigManager, LLMBlogSEOConfig } from "./config";
+import { BlogGenerator } from "./services/blog-generator";
+import { BlogGenerationConfig, BlogPost, SearchResult } from "./types";
+
+export function initialize(config: LLMBlogSEOConfig): BlogGenerator {
+  ConfigManager.initialize(config);
+  return new BlogGenerator();
+}
+
+export {
+  BlogGenerator,
+  BlogGenerationConfig,
+  BlogPost,
+  SearchResult,
+  LLMBlogSEOConfig,
 };
