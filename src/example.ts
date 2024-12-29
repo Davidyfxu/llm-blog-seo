@@ -1,4 +1,5 @@
 import { initialize, BlogGenerationConfig } from "./index";
+import * as process from "process";
 
 async function main() {
   // Initialize the package with configuration
@@ -25,7 +26,7 @@ async function main() {
   });
 
   const config: BlogGenerationConfig = {
-    topic: "The Impact of Artificial Intelligence on Modern Healthcare",
+    topic: "What is the most popular LLM news in the world?",
     targetWordCount: 1500,
     style: "technical",
     targetAudience: "healthcare professionals",
