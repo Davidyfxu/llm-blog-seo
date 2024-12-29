@@ -53,12 +53,6 @@ console.log(blogPost);
 
 The package supports various LLM providers. Here's how to configure them:
 
-## Configuration
-
-### LLM Configuration
-
-The package supports various LLM providers. Here's how to configure them:
-
 ```typescript
 {
 llm: {
@@ -150,3 +144,56 @@ If you encounter any issues or have questions, please file an issue on the GitHu
 - OpenAI for their GPT models
 - Tavily for their research API
 - All contributors who help improve this package
+
+## Architecture
+
+```mermaid
+graph TB
+    subgraph Client["Client Application"]
+        A[Initialize Config] --> B[BlogGenerator]
+    end
+
+    subgraph ConfigSystem["Configuration System"]
+        C[ConfigManager<br>Singleton] --> D[LLMBlogSEOConfig]
+    end
+
+    subgraph BlogGeneration["Blog Generation System"]
+        B --> E[SearchService<br>Search Agent]
+        B --> F[ContentGenerator<br>Content Agent]
+
+        E --> |Search Results| F
+
+        subgraph ContentGenFlow["Content Generation Flow"]
+            F --> G[Context Preparation<br>prepareContext]
+            G --> H[Outline Generator<br>generateOutline]
+            H --> I[Post Generator<br>generateFullPost]
+        end
+    end
+
+    subgraph LLMSystem["LLM System"]
+        J[LLMProviderFactory<br>Factory Pattern] --> K[LLM Providers]
+
+        subgraph Providers["LLM Providers"]
+            K --> L[OpenAI Provider]
+            K --> M[Deepseek Provider]
+            K --> N[Other Providers...]
+        end
+    end
+
+    subgraph SearchSystem["Search System"]
+        E --> O[Tavily API<br>Search Service]
+        O --> P[Content Extraction Service]
+    end
+
+    F --> |Returns| SearchResults
+    F --> |Generates| BlogPost
+
+    %% Modern color scheme
+    classDef system fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
+    classDef agent fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
+    classDef service fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
+
+    class ConfigSystem,LLMSystem,SearchSystem,BlogGeneration system
+    class E,F,G,H,I agent
+    class O,P,L,M,N service
+```
