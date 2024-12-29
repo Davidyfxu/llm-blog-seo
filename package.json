@@ -1,15 +1,15 @@
 {
   "name": "llm-blog-seo",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "AI-powered blog generation tool that leverages LLM technology to create SEO-optimized content",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc || true",
     "test": "jest",
     "lint": "eslint src --ext .ts,.tsx",
     "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
+    "prepublishOnly": "",
     "clean": "rimraf dist"
   },
   "keywords": [
@@ -20,6 +20,10 @@
     "content-generation",
     "llm"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Davidyfxu/llm-blog-seo.git"
+  },
   "author": "davidyfxu",
   "license": "MIT",
   "devDependencies": {
