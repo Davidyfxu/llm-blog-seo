@@ -1,6 +1,6 @@
 {
   "name": "llm-blog-seo",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "AI-powered blog generation tool that leverages LLM technology to create SEO-optimized content",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

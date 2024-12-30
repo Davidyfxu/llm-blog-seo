@@ -1,4 +1,9 @@
-import { BlogGenerationConfig, BlogPost, SearchResult } from "../types";
+import {
+  BlogGenerationConfig,
+  BlogPost,
+  IGenerateBlog,
+  SearchResult,
+} from "../types";
 import { LLMProvider } from "./llm/types";
 import { LLMProviderFactory } from "./llm/provider-factory";
 import { ConfigManager } from "../config";
@@ -14,11 +19,18 @@ export class ContentGenerator {
   async generateBlog(
     config: BlogGenerationConfig,
     searchResults: SearchResult[],
-  ): Promise<BlogPost> {
+  ): Promise<IGenerateBlog> {
     const context = this.prepareContext(searchResults);
     const outline = await this.generateOutline(config, context);
     const blogPost = await this.generateFullPost(config, outline, context);
-    return blogPost;
+    return {
+      blogPost,
+      searchResults: searchResults.map((r) => ({
+        title: r?.title,
+        url: r?.url,
+        content: r?.content,
+      })),
+    };
   }
 
   private prepareContext(searchResults: SearchResult[]): string {
@@ -58,7 +70,7 @@ export class ContentGenerator {
       ${outline}
       
       Requirements:
-      - Topic: ${config.topic}
+      - Topic: ${config.topic} (Summarize to generate a better title based on the content)
       - Target word count: ${config.targetWordCount}
       - Style: ${config.style || "formal"}
       - Target audience: ${config.targetAudience || "general"}

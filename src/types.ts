@@ -21,3 +21,7 @@ export interface BlogPost {
     references: string[];
   };
 }
+export interface IGenerateBlog {
+  blogPost: BlogPost;
+  searchResults: SearchResult[];
+}

@@ -1,7 +1,7 @@
 import { ConfigManager } from "../config";
 import { ContentGenerator } from "./content-generator";
 import { SearchService } from "./search";
-import { BlogGenerationConfig, BlogPost } from "../types";
+import { BlogGenerationConfig, IGenerateBlog } from "../types";
 
 export class BlogGenerator {
   private searchService: SearchService;
@@ -13,7 +13,7 @@ export class BlogGenerator {
     this.contentGenerator = new ContentGenerator(config.openai.apiKey);
   }
 
-  async generateBlog(config: BlogGenerationConfig): Promise<BlogPost> {
+  async generateBlog(config: BlogGenerationConfig): Promise<IGenerateBlog> {
     const searchResults = await this.searchService.searchAndFetch(config.topic);
     return this.contentGenerator.generateBlog(config, searchResults);
   }
