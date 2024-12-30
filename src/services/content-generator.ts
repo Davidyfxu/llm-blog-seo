@@ -69,7 +69,7 @@ export class ContentGenerator {
       Research context:
       ${context}
       
-      Format the response as JSON with the following structure:
+      Format the response as JSON with the following structure (valid JSON object with one line):
       {
         "title": "Blog post title",
         "content": "Full blog post content",
@@ -82,6 +82,6 @@ export class ContentGenerator {
     `;
 
     const response = await this.llmProvider.generateCompletion(prompt);
-    return { content: response.content } as BlogPost;
+    return JSON.parse(response.content) as BlogPost;
   }
 }

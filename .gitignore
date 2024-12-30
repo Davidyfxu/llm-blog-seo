@@ -5,3 +5,4 @@ coverage/
 *.log
 .idea/
 .env
+pnpm-lock.yaml

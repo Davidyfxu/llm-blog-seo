@@ -32,12 +32,13 @@ export class SearchService {
     });
 
     // Iterate through extractResults and merge objects with same URL
-    extractResults.forEach((extractResult: any) => {
+    extractResults.forEach((extractResult: any, index: number) => {
       if (extractResult.url && combinedResults[extractResult.url]) {
         // Merge objects
         combinedResults[extractResult.url] = {
           ...combinedResults[extractResult.url],
           ...extractResult,
+          image: images?.[index],
         };
       }
     });
