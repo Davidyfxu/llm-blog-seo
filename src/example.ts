@@ -1,5 +1,5 @@
 import { initialize, BlogGenerationConfig } from "./index";
-import * as process from "process";
+import * as process from "node:process";
 
 async function main() {
   // Initialize the package with configuration

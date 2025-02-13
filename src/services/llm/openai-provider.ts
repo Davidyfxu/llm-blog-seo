@@ -10,7 +10,6 @@ export class OpenAIProvider implements LLMProvider {
     this.client = new OpenAI({
       apiKey: config.apiKey,
       baseURL: config.baseUrl,
-      defaultHeaders: config.customHeaders,
     });
   }
 
@@ -18,8 +17,8 @@ export class OpenAIProvider implements LLMProvider {
     const response = await this.client.chat.completions.create({
       model: this.config.model || "gpt-4-turbo-preview",
       messages: [{ role: "user", content: prompt }],
-      temperature: this.config.temperature || 0.7,
-      max_tokens: this.config.maxTokens || 4000,
+      temperature: this.config.temperature || 1,
+      max_tokens: this.config.maxTokens || 8192,
     });
 
     return {
