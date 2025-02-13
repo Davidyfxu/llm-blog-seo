@@ -70,7 +70,7 @@ export class ContentGenerator {
       ${outline}
       
       Requirements:
-      - Topic: ${config.topic} (Summarize to generate a better title based on the content)
+      - Topic: ${config.topic} (Summarize to generate a better title based on the content and Shorten the title less than 70 characters)
       - Target word count: ${config.targetWordCount}
       - Style: ${config.style || "formal"}
       - Target audience: ${config.targetAudience || "general"}
